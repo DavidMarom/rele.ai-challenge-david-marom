@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -13,7 +12,19 @@ func enableCors(w *http.ResponseWriter) {
 }
 
 func group(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Group")
+
+	enableCors(&w)
+	w.Header().Set("Content-Type", "application/json")
+
+	reqBody, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	result := reqBody
+
+	w.Write([]byte(result))
+
 }
 
 func ungroup(w http.ResponseWriter, r *http.Request) {
@@ -25,9 +36,9 @@ func ungroup(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 
-	// sb := string(reqBody)
-	// http.ResponseWriter(reqBody)
-	w.Write([]byte(reqBody))
+	result := reqBody
+
+	w.Write([]byte(result))
 }
 
 // Routes
