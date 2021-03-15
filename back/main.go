@@ -4,6 +4,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strings"
 )
 
 func enableCors(w *http.ResponseWriter) {
@@ -14,14 +15,18 @@ func enableCors(w *http.ResponseWriter) {
 func group(w http.ResponseWriter, r *http.Request) {
 
 	enableCors(&w)
-	w.Header().Set("Content-Type", "application/json")
+	// w.Header().Set("Content-Type", "application/json")
 
 	reqBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	result := reqBody
+	result := ""
+	docsArray := strings.Split(string(reqBody), "---")
+	toLines := strings.Split(docsArray[0], "\n")
+
+	result = toLines[0]
 
 	w.Write([]byte(result))
 
@@ -50,4 +55,5 @@ func handleRequests() {
 
 func main() {
 	handleRequests()
+	// Printf(aaa())
 }
