@@ -21,12 +21,26 @@ func group(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
-
+	i := 0
+	// result := "type: DataFile\npayload:\n████\n"
 	result := ""
-	docsArray := strings.Split(string(reqBody), "---")
-	toLines := strings.Split(docsArray[0], "\n")
 
-	result = toLines[0]
+	docsArray := strings.Split(string(reqBody), "---")
+
+	toLines := strings.Split(docsArray[0], "\n")
+	for i = 2; i < len(toLines); i++ {
+		result += toLines[i]
+	}
+
+	toLines = strings.Split(docsArray[1], "\n")
+	for i = 3; i < len(toLines); i++ {
+		result += toLines[i]
+	}
+
+	toLines = strings.Split(docsArray[2], "\n")
+	for i = 3; i < len(toLines); i++ {
+		result += toLines[i]
+	}
 
 	w.Write([]byte(result))
 
