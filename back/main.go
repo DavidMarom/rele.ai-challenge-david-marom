@@ -84,13 +84,25 @@ func group(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf(confFileArr[0])
 
 	// gush = key : title
+	lastItem := ""
+	isFirstTime := true
+
 	for i, gush := range confFileArr { // itterate over the config array
 
 		// if myMap contains a key like gush[0] - add the title and the map key:value
 		if myMap[strings.Split(gush, ":")[0]] != "" {
-			result += strings.Split(gush, ":")[1] + "\n" + "payload:\n"
+			if lastItem != strings.Split(gush, ":")[1] {
+				if !isFirstTime {
+					result += "---\n"
+				} else {
+					isFirstTime = false
+
+				}
+				result += strings.Split(gush, ":")[1] + "\n" + "payload:\n"
+			}
 			result += "\t" + strings.Split(gush, ":")[0] + ":" + myMap[strings.Split(gush, ":")[0]]
-			result += "---\n"
+
+			lastItem = strings.Split(gush, ":")[1]
 		}
 
 		fmt.Println(i)
