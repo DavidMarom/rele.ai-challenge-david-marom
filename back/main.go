@@ -71,17 +71,30 @@ func group(w http.ResponseWriter, r *http.Request) {
 		myMap[strings.Split(tmpString, ":")[0]] = strings.Split(tmpString, ":")[1]
 	}
 
-	// Prepare the final string with header
-	result := "Line 01\nLine 02\n"
+	// Prepare the final
+	result := ""
 
 	// *** itterate over config file and add to result ***
 
-	confFile, err := ioutil.ReadFile("group-config.yaml") // read file
+	confFile, err := ioutil.ReadFile("group-config.yaml") // read config.YAML file...
 	if err != nil {
 		fmt.Print(err)
 	}
-	confFileArr := strings.Split(string(confFile), "\n") // put config.YAML file in an array
+	confFileArr := strings.Split(string(confFile), "\n") // ... and put it in an array
 	fmt.Printf(confFileArr[0])
+
+	// gush = key : title
+	for i, gush := range confFileArr { // itterate over the config array
+
+		// if myMap contains a key like gush[0] - add the title and the map key:value
+		if myMap[strings.Split(gush, ":")[0]] != "" {
+			result += strings.Split(gush, ":")[1] + "\n" + "payload:\n"
+			result += "\t" + strings.Split(gush, ":")[0] + ":" + myMap[strings.Split(gush, ":")[0]]
+			result += "---\n"
+		}
+
+		fmt.Println(i)
+	}
 
 	if myMap["aaa"] != "" {
 		result += "aaa:" + myMap["aaa"]
