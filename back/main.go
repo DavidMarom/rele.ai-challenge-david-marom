@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -12,7 +13,8 @@ func enableCors(w *http.ResponseWriter) {
 	(*w).Header().Set("Access-Control-Allow-Credentials", "true")
 }
 
-func group(w http.ResponseWriter, r *http.Request) {
+func ungroup(w http.ResponseWriter, r *http.Request) {
+	fmt.Printf("hey")
 	enableCors(&w)
 	reqBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -40,17 +42,43 @@ func group(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(result))
 }
 
-func ungroup(w http.ResponseWriter, r *http.Request) {
+func group(w http.ResponseWriter, r *http.Request) {
 	enableCors(&w)
+	i := 0
 
 	reqBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	// m[] := make(map[string]string)
+	// Break to lines and remove first 2
+	linesArray := strings.Split(string(reqBody), "\n")
+	// remove first 2 indexes - deep copy
+	arrayMinusTwoFirstLines := make([]string, len(linesArray))
+	for i = 2; i < len(linesArray); i++ {
+		arrayMinusTwoFirstLines[i-2] = linesArray[i]
+	}
 
-	result := reqBody
+	// seperate by ":" and insert to map
+
+	myMap := make(map[string]string)
+	tmpString := ""
+
+	for i = 0; i < len(arrayMinusTwoFirstLines)-2; i++ {
+		tmpString = arrayMinusTwoFirstLines[i]
+
+		// insert a[0] and a[1] to map in a form of key:value pairs
+		myMap[strings.Split(tmpString, ":")[0]] = strings.Split(tmpString, ":")[1]
+	}
+
+	// Prepare the final string with header
+	result := "Line 01\nLine 02\n"
+
+	// itterate over config file and add to result
+
+	if myMap["aaa"] != "" {
+		result += "aaa:" + myMap["aaa"]
+	}
 
 	// Send result to the client
 	w.Write([]byte(result))
@@ -65,5 +93,4 @@ func handleRequests() {
 
 func main() {
 	handleRequests()
-	// Printf(aaa())
 }
