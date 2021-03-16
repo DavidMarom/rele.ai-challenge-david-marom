@@ -74,7 +74,14 @@ func group(w http.ResponseWriter, r *http.Request) {
 	// Prepare the final string with header
 	result := "Line 01\nLine 02\n"
 
-	// itterate over config file and add to result
+	// *** itterate over config file and add to result ***
+
+	confFile, err := ioutil.ReadFile("group-config.yaml") // read file
+	if err != nil {
+		fmt.Print(err)
+	}
+	confFileArr := strings.Split(string(confFile), "\n") // put config.YAML file in an array
+	fmt.Printf(confFileArr[0])
 
 	if myMap["aaa"] != "" {
 		result += "aaa:" + myMap["aaa"]
