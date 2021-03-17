@@ -1,5 +1,5 @@
 # RELE.AI - Coding Challenge
 
 Endpoints:
-  ```/group```
-  ```/ungroup```
+  - ```/group```
+  - ```/ungroup```
