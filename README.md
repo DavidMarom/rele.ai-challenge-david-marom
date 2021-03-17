@@ -10,14 +10,14 @@ Routes:
   - ```/group```
   - ```/ungroup```
 
-# Test routes using postman
+### Test routes using postman
 Use the postman export attached: `rele.postman_collection.json`
 
 Or create your own:
 Send a GET request to http://localhost:8081/group (or ungroup) \
 Put the YAML format in the request body
 
-# Config file for the group route
+### Config file for the group route
 
 The server will use the `group-config.yaml` file as a dictionary for the grouping process \
 Template: \
