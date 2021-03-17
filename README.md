@@ -24,7 +24,7 @@ Template: \
 key:the group you want to put it in
 
 ### Examples for grouped an ungrouped YAML files:
-Grouped: \
+Grouped:
 ```yaml
 type: DataFileWrite
 payload:
@@ -36,4 +36,15 @@ payload:
     timeout: 60
 ```
 
+Ungrouped:
+```yaml
+type: DataFile
+payload:
+    content: "foo"
+    destination: "/tmp"
+    timeout: 60
+```
+
 ## Frontend
+Written in React
+Not done yet
