@@ -93,7 +93,7 @@ func Group(w http.ResponseWriter, r *http.Request) {
 				} else {
 					isFirstTime = false
 				}
-				result += strings.Split(gush, ":")[1] + "\n" + "payload:\n"
+				result += "type: " + strings.Split(gush, ":")[1] + "\n" + "payload:\n"
 			}
 			result += "\t" + strings.Split(gush, ":")[0] + ":" + myMap[strings.Split(gush, ":")[0]]
 			lastItem = strings.Split(gush, ":")[1]
