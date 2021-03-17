@@ -20,8 +20,11 @@ Put the YAML format in the request body
 ### Config file for the group route
 
 The server will use the `group-config.yaml` file as a dictionary for the grouping process \
+Use this config file to define your own grouping rules \
 Template: \
 key:the group you want to put it in
+
+Example: I want the key-pair `aaa:bbb` to appear under "ccc" -> I will add aaa:ccc to the `group-config.yaml` file
 
 ### Examples for grouped an ungrouped YAML files:
 Grouped:
