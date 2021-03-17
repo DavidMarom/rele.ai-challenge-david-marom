@@ -1,7 +1,4 @@
 # RELE.AI - Coding Challenge : David Marom
-
-## Description
-
 Converts an ungrouped YAML format to a grouped format and vice versa
 
 ## Backend
