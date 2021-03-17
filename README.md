@@ -21,6 +21,19 @@ Put the YAML format in the request body
 
 The server will use the `group-config.yaml` file as a dictionary for the grouping process \
 Template: \
-<key>:<the group you want to put it in>
+key:the group you want to put it in
+
+### Examples for grouped an ungrouped YAML files:
+Grouped: \
+```yaml
+type: DataFileWrite
+payload:
+    content: "foo"
+    destination: "/tmp"
+---
+type: DataFileTimeout
+payload:
+    timeout: 60
+```
 
 ## Frontend
