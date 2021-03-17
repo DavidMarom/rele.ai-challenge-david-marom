@@ -4,15 +4,14 @@
 
 Converts an ungrouped YAML format to a grouped format and vice versa
 
+## Backend
+Requirements: Go lang has to be installed on local machine: https://golang.org/doc/install \
+Run: go run main.go\
+Port: 8081 \
 
 Routes:
   - ```/group```
   - ```/ungroup```
-
-## Backend
-Run command: go run main.go\
-Requirements: Go lang has to be installed on local machine: https://golang.org/doc/install \
-Port: 8081 \
 
 ## Test Routes
 Use the postman export attached: `rele.postman_collection.json`
