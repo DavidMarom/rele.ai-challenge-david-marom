@@ -44,7 +44,3 @@ payload:
     destination: "/tmp"
     timeout: 60
 ```
-
-## Frontend
-Written in React \
-Not done yet
