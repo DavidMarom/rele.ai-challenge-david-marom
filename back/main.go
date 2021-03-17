@@ -13,13 +13,14 @@ func enableCors(w *http.ResponseWriter) {
 	(*w).Header().Set("Access-Control-Allow-Credentials", "true")
 }
 
+// ******  UNGROUP ROUTE  ******
 func ungroup(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("hey")
 	enableCors(&w)
 	reqBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	i := 0
 	j := 0
 	result := "type: DataFile\npayload:\n"
@@ -42,28 +43,25 @@ func ungroup(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(result))
 }
 
+// ******  GROUP ROUTE ******
 func group(w http.ResponseWriter, r *http.Request) {
 	enableCors(&w)
-	i := 0
-
 	reqBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	// Break to lines and remove first 2
-	linesArray := strings.Split(string(reqBody), "\n")
-	// remove first 2 indexes - deep copy
-	arrayMinusTwoFirstLines := make([]string, len(linesArray))
+	linesArray := strings.Split(string(reqBody), "\n")         // Break to lines and remove first 2
+	arrayMinusTwoFirstLines := make([]string, len(linesArray)) // remove first 2 indexes - deep copy
+
+	i := 0
 	for i = 2; i < len(linesArray); i++ {
 		arrayMinusTwoFirstLines[i-2] = linesArray[i]
 	}
 
 	// seperate by ":" and insert to map
-
 	myMap := make(map[string]string)
 	tmpString := ""
-
 	for i = 0; i < len(arrayMinusTwoFirstLines)-2; i++ {
 		tmpString = arrayMinusTwoFirstLines[i]
 
@@ -71,8 +69,7 @@ func group(w http.ResponseWriter, r *http.Request) {
 		myMap[strings.Split(tmpString, ":")[0]] = strings.Split(tmpString, ":")[1]
 	}
 
-	// Prepare the final
-	result := ""
+	result := "" // Prepare the final string
 
 	// *** itterate over config file and add to result ***
 
@@ -81,7 +78,6 @@ func group(w http.ResponseWriter, r *http.Request) {
 		fmt.Print(err)
 	}
 	confFileArr := strings.Split(string(confFile), "\n") // ... and put it in an array
-	fmt.Printf(confFileArr[0])
 
 	// gush = key : title
 	lastItem := ""
@@ -96,15 +92,12 @@ func group(w http.ResponseWriter, r *http.Request) {
 					result += "---\n"
 				} else {
 					isFirstTime = false
-
 				}
 				result += strings.Split(gush, ":")[1] + "\n" + "payload:\n"
 			}
 			result += "\t" + strings.Split(gush, ":")[0] + ":" + myMap[strings.Split(gush, ":")[0]]
-
 			lastItem = strings.Split(gush, ":")[1]
 		}
-
 		fmt.Println(i)
 	}
 
