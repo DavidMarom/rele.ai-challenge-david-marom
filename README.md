@@ -17,8 +17,8 @@ Routes:
 Use the postman export attached: `rele.postman_collection.json`
 
 Or create your own:
-Send a GET request to http://localhost:8081/`<group` or `<ungroup>`
-Put the YAML format in the request body
+Send a GET request to http://localhost:8081/group (or ungroup) \
+Put the YAML format in the request body \
 
 ## Config file for the group route
 
