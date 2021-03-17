@@ -2,7 +2,8 @@
 Converts an ungrouped YAML format to a grouped format and vice versa
 
 ## Backend
-Requirements: Go lang has to be installed on local machine: https://golang.org/doc/install \
+
+Requirements: Go lang has to be installed on the machine: https://golang.org/doc/install \
 Run: `go run main.go` \
 Port: 8081 
 
