@@ -1,0 +1,71 @@
+{
+	"info": {
+		"_postman_id": "19d2db98-7152-47ee-a95d-eab9982dcb91",
+		"name": "rele",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET group",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "type: DataFile\r\npayload:\r\ncontent: \"foo\"\r\ndestination: \"/tmp\"\r\ntimeout: 60",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/group",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"group"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET upgroup",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "type: DataFileWrite\r\npayload:\r\n    a: \"foo\"\r\n    b: \"/tmp\"\r\n---\r\ntype: DataFileTimeout\r\npayload:\r\n    c: 60\r\n---\r\ntype: DataFileTimeout\r\npayload:\r\n    d: 880\r\n    e: 4888\r\n    f: 345888\r\n",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/ungroup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"ungroup"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
