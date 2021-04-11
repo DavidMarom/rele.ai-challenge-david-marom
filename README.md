@@ -12,11 +12,11 @@ Routes:
   - ```/ungroup```
 
 ### Test routes using postman
-Use the postman export attached: `rele.postman_collection.json`
+Use the postman export attached: `rele.postman_collection.json` (file is in the repo)
 
 Or create your own:
 Send a GET request to http://localhost:8081/group (or ungroup) \
-Put the YAML you wich to group / ungroup in the request body
+Put the YAML you wish to group / ungroup in the request body
 
 ### Config file for the group route
 
